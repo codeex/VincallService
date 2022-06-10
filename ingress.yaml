@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: vincallservice
+  namespace: NAMESPACE
+  annotations:
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
+    
+spec:
+  tls:
+  - hosts:
+    - api.vincall.net     
+    secretName: api.vincall.net 
+  - hosts:
+    - apitest.vincall.net     
+    secretName: api.vincall.net 
+  - hosts:
+    - apivincall.comm100dev.io     
+    secretName: comm100dev-io-tls
+  rules: 
+  - host: api.vincall.net
+    http:
+      paths:
+        - path: /api/(.*)
+          backend:
+            serviceName: vincallservice
+            servicePort: 80
+  - host: apitest.vincall.net
+    http:
+      paths:
+        - path: /api/(.*)
+          backend:
+            serviceName: vincallservice
+            servicePort: 80
+  - host: apivincall.comm100dev.io   
+    http:
+      paths:
+        - path: /api/(.*)
+          backend:
+            serviceName: vincallservice
+            servicePort: 80

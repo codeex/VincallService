@@ -1,20 +1,78 @@
-# Introduction 
-TODO: Give a short introduction of your project. Let this section explain the objectives or the motivation behind this project. 
+## Introduction
 
-# Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+This is a simple pipeline example for a .NET Core application, showing just
+how easy it is to get up and running with .NET development using GitLab.
 
-# Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+# Reference links
 
-# Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
+- [GitLab CI Documentation](https://docs.gitlab.com/ee/ci/)
+- [.NET Hello World tutorial](https://dotnet.microsoft.com/learn/dotnet/hello-world-tutorial/)
 
-If you want to learn more about creating good readme files then refer the following [guidelines](https://docs.microsoft.com/en-us/azure/devops/repos/git/create-a-readme?view=azure-devops). You can also seek inspiration from the below readme files:
-- [ASP.NET Core](https://github.com/aspnet/Home)
-- [Visual Studio Code](https://github.com/Microsoft/vscode)
-- [Chakra Core](https://github.com/Microsoft/ChakraCore)
+If you're new to .NET you'll want to check out the tutorial, but if you're
+already a seasoned developer considering building your own .NET app with GitLab,
+this should all look very familiar.
+
+## What's contained in this project
+
+The root of the repository contains the out of the `dotnet new console` command,
+which generates a new console application that just prints out "Hello, World."
+It's a simple example, but great for demonstrating how easy GitLab CI is to
+use with .NET. Check out the `Program.cs` and `dotnetcore.csproj` files to
+see how these work.
+
+In addition to the .NET Core content, there is a ready-to-go `.gitignore` file
+sourced from the the .NET Core [.gitignore](https://github.com/dotnet/core/blob/master/.gitignore). This
+will help keep your repository clean of build files and other configuration.
+
+Finally, the `.gitlab-ci.yml` contains the configuration needed for GitLab
+to build your code. Let's take a look, section by section.
+
+First, we note that we want to use the official Microsoft .NET SDK image
+to build our project.
+
+```
+image: microsoft/dotnet:latest
+```
+
+We're defining two stages here: `build`, and `test`. As your project grows
+in complexity you can add more of these.
+
+```
+stages:
+    - build
+    - test
+```
+
+Next, we define our build job which simply runs the `dotnet build` command and
+identifies the `bin` folder as the output directory. Anything in the `bin` folder
+will be automatically handed off to future stages, and is also downloadable through
+the web UI.
+
+```
+build:
+    stage: build
+    script:
+        - "dotnet build"
+    artifacts:
+      paths:
+        - bin/
+```
+
+Similar to the build step, we get our test output simply by running `dotnet test`.
+
+```
+test:
+    stage: test
+    script: 
+        - "dotnet test"
+```
+
+This should be enough to get you started. There are many, many powerful options 
+for your `.gitlab-ci.yml`. You can read about them in our documentation 
+[here](https://docs.gitlab.com/ee/ci/yaml/).
+
+## Developing with Gitpod
+
+This template repository also has a fully-automated dev setup for [Gitpod](https://docs.gitlab.com/ee/integration/gitpod.html).
+
+The `.gitpod.yml` ensures that, when you open this repository in Gitpod, you'll get a cloud workspace with .NET Core pre-installed, and your project will automatically be built and start running.
