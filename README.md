@@ -1,78 +1,57 @@
-## Introduction
+# Introduction
 
-This is a simple pipeline example for a .NET Core application, showing just
-how easy it is to get up and running with .NET development using GitLab.
+The project is the back-end program of Vincall's Admin Panel, using .NET core 3.1 technology, providing Vincall's agent, report, voice, and other standard API interfaces.
 
-# Reference links
-
-- [GitLab CI Documentation](https://docs.gitlab.com/ee/ci/)
-- [.NET Hello World tutorial](https://dotnet.microsoft.com/learn/dotnet/hello-world-tutorial/)
-
-If you're new to .NET you'll want to check out the tutorial, but if you're
-already a seasoned developer considering building your own .NET app with GitLab,
-this should all look very familiar.
-
-## What's contained in this project
-
-The root of the repository contains the out of the `dotnet new console` command,
-which generates a new console application that just prints out "Hello, World."
-It's a simple example, but great for demonstrating how easy GitLab CI is to
-use with .NET. Check out the `Program.cs` and `dotnetcore.csproj` files to
-see how these work.
-
-In addition to the .NET Core content, there is a ready-to-go `.gitignore` file
-sourced from the the .NET Core [.gitignore](https://github.com/dotnet/core/blob/master/.gitignore). This
-will help keep your repository clean of build files and other configuration.
-
-Finally, the `.gitlab-ci.yml` contains the configuration needed for GitLab
-to build your code. Let's take a look, section by section.
-
-First, we note that we want to use the official Microsoft .NET SDK image
-to build our project.
-
+# Initializing
+Clone VincallService repository on your computer, install dependencies using:
 ```
-image: microsoft/dotnet:latest
+git clone xxx
+```
+Then if you want to run the project, go to the directory VincallService.
+```
+dotnet run 
 ```
 
-We're defining two stages here: `build`, and `test`. As your project grows
-in complexity you can add more of these.
+The configuration items of the project are as follows and can be modified according to the actual situation.
+```json
+{
+  "ConnectionStrings": {
+    "Vincall": "Server=192.168.2.215;User=sa;Password=Aa00000000;Database=vincall"
+  },
+  "InitDB": "false",
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },   
+  "OauthUri": "https://oauth.vincall.net",  
+  "TokenPrivateKey": "MIIFHDBOBgkqhkiG9w0***=="
+
+}
+```
+- ConnectionStrings: The connection string to Microsoft SQL server database.
+- InitDB: Whether to recreate the database table structure and initialize the population of data. If the data table structure has already been initialized, it will not be modified again.
+- Logging: The definition and type of the log output are changed
+- OauthUri: Vincall's OAuth 2 service address.
+- TokenPrivateKey: Private key ciphertext required for token issuance.
+
+If you are initializing for the first time, you will need to prepare the MS SQL Server environment. Once you have the database environment ready, you can change the ConnectionString Authdb key and InitDB key.
 
 ```
-stages:
-    - build
-    - test
+ "ConnectionStrings": {
+    "AuthDB": "Server=[your ip];User=[your username];Password=[your passwor];Database=vincall"
+  },
+  "InitDB": "true",
 ```
-
-Next, we define our build job which simply runs the `dotnet build` command and
-identifies the `bin` folder as the output directory. Anything in the `bin` folder
-will be automatically handed off to future stages, and is also downloadable through
-the web UI.
+Then to run the program.
 
 ```
-build:
-    stage: build
-    script:
-        - "dotnet build"
-    artifacts:
-      paths:
-        - bin/
+dotnet run
 ```
+Finally, Let's check database when opening Microsoft SQL server management studio.
 
-Similar to the build step, we get our test output simply by running `dotnet test`.
+![image.png](/.attachments/image-4637c1e5-e09f-4796-b270-607d5b10154c.png)
 
-```
-test:
-    stage: test
-    script: 
-        - "dotnet test"
-```
-
-This should be enough to get you started. There are many, many powerful options 
-for your `.gitlab-ci.yml`. You can read about them in our documentation 
-[here](https://docs.gitlab.com/ee/ci/yaml/).
-
-## Developing with Gitpod
-
-This template repository also has a fully-automated dev setup for [Gitpod](https://docs.gitlab.com/ee/integration/gitpod.html).
-
-The `.gitpod.yml` ensures that, when you open this repository in Gitpod, you'll get a cloud workspace with .NET Core pre-installed, and your project will automatically be built and start running.
+That is ok.
