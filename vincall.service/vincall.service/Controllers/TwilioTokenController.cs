@@ -39,6 +39,7 @@ namespace vincall.service.Controllers
             _logger.LogInformation($"user id--->{user.Id}   user.Account----->{user.Account}  user.IsAdmin------->{user.IsAdmin}");
             Agent agent = new Agent();
             string deviceNum = string.Empty;
+            //Admin user can designate the agent with agentId.
             if (user.IsAdmin)
             {
                 agent = _services.ReadSingleAsync<Agent>(x => x.Id == agentId).GetAwaiter().GetResult();
@@ -54,7 +55,8 @@ namespace vincall.service.Controllers
                 }
                 deviceNum = agent?.DeviceNumber??string.Empty;
             }
-            var identity = deviceNum;//agent state ->
+            var identity = deviceNum;
+            //set agent state to available
             if (agent != null)
             {
                 agent.State = 1;

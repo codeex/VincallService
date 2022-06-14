@@ -14,8 +14,8 @@ namespace Vincall.Infrastructure
         public DateTime? CreateDate { get; set; }
         public bool IsAdmin { get; set; }
 
-        public long TenantId { get; set; }
-        public string Email { get; set; }
+        //public long TenantId { get; set; }
+        //public string Email { get; set; }
 
     }
 }

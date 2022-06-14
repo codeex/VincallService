@@ -36,8 +36,6 @@ namespace vincall.service.Controllers
         [HttpPost("voice")]
         public async Task<IActionResult> Index(string to, string callingDeviceIdentity)
         {
-
-            _logger.LogInformation($"step1: enter voice  To:{to}-----id:{callingDeviceIdentity}");
             var twilioSetting = _twilioSettingCacheService.GetTwilioSettingCache().FirstOrDefault();
             var callerId = twilioSetting.CallId;
             var twiml = new VoiceResponse();
@@ -45,13 +43,10 @@ namespace vincall.service.Controllers
             // someone calls into my Twilio Number, there is no thisDeviceIdentity passed to the /voice endpoint 
             if (string.IsNullOrEmpty(callingDeviceIdentity))
             {
-
-                _logger.LogInformation($"branch1: id is null------------");
                 var calledagent = _services.ReadMany<Agent>(x => x.State == 1).FirstOrDefault();
                 var avaliableIndentity = calledagent?.DeviceNumber;
                 if (avaliableIndentity == null)
                 {
-                    _logger.LogInformation($"branch1.1: avaliableAgentid is null------------");
                     var exceptionResult = new VoiceResponse();
                     exceptionResult.Say("Sorry, there are no valiable agents now.");
                     return Content(exceptionResult.ToString(), "text/xml");
@@ -63,23 +58,10 @@ namespace vincall.service.Controllers
                 twiml.Append(dial);
                 calledagent.State = 2;
                 await _services.UpdateAndSaveAsync<Agent>(calledagent);
-
-                _logger.LogInformation($"branch1.3: huru:  to: {to}, callingDeviceIdentity: {callingDeviceIdentity}, thisDevice.Identity: {avaliableIndentity}");
-
             }
-            //else if (callingDeviceIdentity != avaliableIndentity)
-            //{
-            //    var dial = new Dial();
-            //    var client = new Client();
-            //    client.Identity(avaliableIndentity);
-            //    dial.Append(client);
-            //    twiml.Append(dial);
-            //}
-            // if the POST request contains your browser device's identity
-            // make an outgoing call to either another client or a number
+            // Call someone
             else
             {
-                _logger.LogInformation($"branch2.1: huchu id:{callingDeviceIdentity}------------");
                 var callingAgent = await _services.ReadSingleAsync<Agent>(x => x.DeviceNumber == callingDeviceIdentity);
                 callingAgent.State = 2;
                 await _services.UpdateAndSaveAsync<Agent>(callingAgent);
@@ -88,13 +70,10 @@ namespace vincall.service.Controllers
                 // check if the 'To' property in the POST request is
                 // a client name or a phone number
                 // and dial appropriately using either Number or Client
-                _logger.LogInformation($"branch2.2: huchu id:{callingDeviceIdentity}------------");
                 if (Regex.IsMatch(to, "^[\\d\\+\\-\\(\\) ]+$"))
                 {
                     Console.WriteLine("Match is true");
                     dial.Number(to);
-
-                    _logger.LogInformation($"branch2.3: huchu id:{to}------------");
                 }
                 else
                 {
@@ -103,7 +82,6 @@ namespace vincall.service.Controllers
                         var client = new Client();
                         client.Identity(to.Substring(4));
                         dial.Append(client);
-                        _logger.LogInformation($"branch2.2: huchu id:{to}------------");
                     }
                     else
                     {
@@ -113,15 +91,10 @@ namespace vincall.service.Controllers
                     }
 
                 }
-
                 twiml.Append(dial);
-
-                _logger.LogInformation($"huchu:  to: {to}, callingDeviceIdentity: {callingDeviceIdentity}, thisDevice.Identity: {callingDeviceIdentity}");
             }
-
             Console.WriteLine(twiml.ToString());
-            _logger.LogInformation($"-----voiceresult: {twiml.ToString()}");
-
+            _logger.LogInformation($"-----voiceResult: {twiml.ToString()}");
             return Content(twiml.ToString(), "text/xml");
         }
     }
