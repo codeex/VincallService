@@ -8,5 +8,6 @@ namespace Vincall.Service.Services
     public interface ICheckAgentChangeStateService
     {
         void CheckAgentChangeState();
+
     }
 }

@@ -1,0 +1,18 @@
+2022-06-14 13:15:07.9605 Info Message Template Auto Format enabled
+2022-06-14 13:15:07.9820 Info Loading assembly: NLog.Web.AspNetCore
+2022-06-14 13:15:08.0571 Info Adding target AsyncTargetWrapper(Name=allfile)
+2022-06-14 13:15:08.0697 Info Adding target AsyncTargetWrapper(Name=ownFile-web)
+2022-06-14 13:15:08.1170 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error parsing layout aspnet-application
+ ---> System.ArgumentException: LayoutRenderer symbol-name is unknown: 'aspnetapplication'. Extension NLog.Web.AspNetCore not included?
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(String typeName, ConfigurationItemFactory configurationItemFactory, Nullable`1 throwConfigExceptions)
+   --- End of inner exception stack trace ---
+2022-06-14 13:15:08.1983 Info Adding target AsyncTargetWrapper(Name=jsonLog)
+2022-06-14 13:15:08.1983 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error parsing layout aspnet-application
+ ---> System.ArgumentException: LayoutRenderer symbol-name is unknown: 'aspnetapplication'. Extension NLog.Web.AspNetCore not included?
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(String typeName, ConfigurationItemFactory configurationItemFactory, Nullable`1 throwConfigExceptions)
+   --- End of inner exception stack trace ---
+2022-06-14 13:15:08.1983 Info Adding target AsyncTargetWrapper(Name=logConsole)
+2022-06-14 13:15:08.2455 Info Validating config: TargetNames=allfile, logConsole, jsonLog, ownFile-web, ConfigItems=121, FilePath=D:\NetCoreExamples\Vincall\VincallService\vincall.service\vincall.service\bin\Debug\netcoreapp3.1\NLog.config
+2022-06-14 13:15:09.7406 Info Validating config: TargetNames=allfile, logConsole, jsonLog, ownFile-web, ConfigItems=121, FilePath=D:\NetCoreExamples\Vincall\VincallService\vincall.service\vincall.service\bin\Debug\netcoreapp3.1\NLog.config
