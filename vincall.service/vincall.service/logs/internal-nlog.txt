@@ -167,3 +167,44 @@
 2022-06-14 14:58:53.0283 Info Adding target AsyncTargetWrapper(Name=logConsole)
 2022-06-14 14:58:53.0486 Info Validating config: TargetNames=allfile, logConsole, jsonLog, ownFile-web, ConfigItems=121, FilePath=D:\NetCoreExamples\Vincall\VincallService\vincall.service\vincall.service\bin\Debug\netcoreapp3.1\NLog.config
 2022-06-14 14:58:53.3601 Info Validating config: TargetNames=allfile, logConsole, jsonLog, ownFile-web, ConfigItems=121, FilePath=D:\NetCoreExamples\Vincall\VincallService\vincall.service\vincall.service\bin\Debug\netcoreapp3.1\NLog.config
+2022-06-14 15:45:13.7129 Info Message Template Auto Format enabled
+2022-06-14 15:45:13.7129 Info Loading assembly: NLog.Web.AspNetCore
+2022-06-14 15:45:13.7495 Info Adding target AsyncTargetWrapper(Name=allfile)
+2022-06-14 15:45:13.7495 Info Adding target AsyncTargetWrapper(Name=ownFile-web)
+2022-06-14 15:45:13.7687 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error parsing layout aspnet-application
+ ---> System.ArgumentException: LayoutRenderer symbol-name is unknown: 'aspnetapplication'. Extension NLog.Web.AspNetCore not included?
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(String typeName, ConfigurationItemFactory configurationItemFactory, Nullable`1 throwConfigExceptions)
+   --- End of inner exception stack trace ---
+2022-06-14 15:45:13.7781 Info Adding target AsyncTargetWrapper(Name=jsonLog)
+2022-06-14 15:45:13.7781 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error parsing layout aspnet-application
+ ---> System.ArgumentException: LayoutRenderer symbol-name is unknown: 'aspnetapplication'. Extension NLog.Web.AspNetCore not included?
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(String typeName, ConfigurationItemFactory configurationItemFactory, Nullable`1 throwConfigExceptions)
+   --- End of inner exception stack trace ---
+2022-06-14 15:45:13.7781 Info Adding target AsyncTargetWrapper(Name=logConsole)
+2022-06-14 15:45:13.7978 Info Validating config: TargetNames=allfile, logConsole, jsonLog, ownFile-web, ConfigItems=121, FilePath=D:\NetCoreExamples\Vincall\VincallService\vincall.service\vincall.service\bin\Debug\netcoreapp3.1\NLog.config
+2022-06-14 15:45:14.0738 Info Validating config: TargetNames=allfile, logConsole, jsonLog, ownFile-web, ConfigItems=121, FilePath=D:\NetCoreExamples\Vincall\VincallService\vincall.service\vincall.service\bin\Debug\netcoreapp3.1\NLog.config
+2022-06-14 15:45:18.4459 Info Shutdown() called. Logger closing...
+2022-06-14 15:45:18.4459 Info Closing old configuration.
+2022-06-14 15:45:18.4583 Info Logger has been closed down.
+2022-06-14 15:45:22.3317 Info Shutdown() called. Logger closing...
+2022-06-14 15:45:22.3328 Info Logger has been closed down.
+2022-06-14 15:45:51.6235 Info Message Template Auto Format enabled
+2022-06-14 15:45:51.6300 Info Loading assembly: NLog.Web.AspNetCore
+2022-06-14 15:45:51.6617 Info Adding target AsyncTargetWrapper(Name=allfile)
+2022-06-14 15:45:51.6617 Info Adding target AsyncTargetWrapper(Name=ownFile-web)
+2022-06-14 15:45:51.6808 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error parsing layout aspnet-application
+ ---> System.ArgumentException: LayoutRenderer symbol-name is unknown: 'aspnetapplication'. Extension NLog.Web.AspNetCore not included?
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(String typeName, ConfigurationItemFactory configurationItemFactory, Nullable`1 throwConfigExceptions)
+   --- End of inner exception stack trace ---
+2022-06-14 15:45:51.6917 Info Adding target AsyncTargetWrapper(Name=jsonLog)
+2022-06-14 15:45:51.6917 Warn Error has been raised. Exception: NLog.NLogConfigurationException: Error parsing layout aspnet-application
+ ---> System.ArgumentException: LayoutRenderer symbol-name is unknown: 'aspnetapplication'. Extension NLog.Web.AspNetCore not included?
+   at NLog.Config.Factory`2.CreateInstance(String itemName)
+   at NLog.Layouts.LayoutParser.GetLayoutRenderer(String typeName, ConfigurationItemFactory configurationItemFactory, Nullable`1 throwConfigExceptions)
+   --- End of inner exception stack trace ---
+2022-06-14 15:45:51.6917 Info Adding target AsyncTargetWrapper(Name=logConsole)
+2022-06-14 15:45:51.7091 Info Validating config: TargetNames=allfile, logConsole, jsonLog, ownFile-web, ConfigItems=121, FilePath=D:\NetCoreExamples\Vincall\VincallService\vincall.service\vincall.service\bin\Debug\netcoreapp3.1\NLog.config
+2022-06-14 15:45:51.8922 Info Validating config: TargetNames=allfile, logConsole, jsonLog, ownFile-web, ConfigItems=121, FilePath=D:\NetCoreExamples\Vincall\VincallService\vincall.service\vincall.service\bin\Debug\netcoreapp3.1\NLog.config
