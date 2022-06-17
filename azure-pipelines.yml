@@ -7,9 +7,13 @@ trigger:
 
 resources:
 - repo: self
+ 
 
 variables:
   tag: '$(Build.BuildId)'
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
 
 stages:
 
@@ -20,17 +24,27 @@ stages:
     displayName: Build
     pool:
       vmImage: ubuntu-latest
-    steps:    
+    steps: 
+    - task: UseDotNet@2
+      displayName: 'Install .NET 3.1 SDK'
+      inputs:
+        version: '3.1.x'
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: 'restore'
+        projects: '**/*.csproj'
+        feedsToUse: 'select'
+        vstsFeed: 'vincall-feed'
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
-        projects: 'vincall.service.csproj'
-        workingDirectory: 'vincall.service/vincall.service'
+        arguments: '--configuration $(buildConfiguration)'
+        projects: '**/vincall.service.csproj'       
     - task: DotNetCoreCLI@2
       inputs:
         command: 'publish'
-        publishWebProjects: true
-        workingDirectory: './vincall.service/vincall.service'
+        publishWebProjects: true  
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'    
     - task: Docker@2
       displayName: Build an image
       inputs:
