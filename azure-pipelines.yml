@@ -32,9 +32,7 @@ stages:
     - task: DotNetCoreCLI@2
       inputs:
         command: 'restore'
-        projects: '**/*.csproj'
-        feedsToUse: 'select'
-        vstsFeed: 'vincall-feed'
+        projects: '**/*.csproj'      
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
