@@ -48,10 +48,16 @@ stages:
         SourceFolder: '$(Build.ArtifactStagingDirectory)'
         Contents: '**'
         TargetFolder: './release' 
+#    - task: Docker@2
+#      displayName: Build an image
+#      inputs:
+#        command: build
+#        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+#        tags: |
+#          $(tag)
     - task: Docker@2
-      displayName: Build an image
       inputs:
-        command: build
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        tags: |
-          $(tag)
+        containerRegistry: 'register'
+        repository: '/x2/vincallservice/test-vincall:$[format(''{0:yyyy-MM-dd-HH-mm-ss}'', pipeline.startTime)]-$(Build.BuildId)'
+        command: 'buildAndPush'
+        Dockerfile: '**/Dockerfile'
