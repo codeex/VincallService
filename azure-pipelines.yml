@@ -60,6 +60,6 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'register'
-        repository: 'x2/vincallservice/test-vincall:$(buildTime)-$(Build.BuildId)'
+        repository: 'x2/vincallservice/test-vincall'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
