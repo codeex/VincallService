@@ -26,11 +26,7 @@ stages:
       vmImage: ubuntu-latest
     variables:
       buildTime: $[format('{0:yyyyMMddHHmmss}', pipeline.startTime)]
-    steps: 
-    - task: Bash@3
-      inputs:
-        targetType: 'inline'
-        script: echo build image tag is  $(buildTime)
+    steps:    
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
@@ -58,6 +54,6 @@ stages:
         containerRegistry: 'register'
         repository: 'x2/vincallservice/test-vincall'
         tags: |
-          $(buildTime)
+          $(Build.BuildNumber)
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
