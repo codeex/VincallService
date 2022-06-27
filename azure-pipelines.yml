@@ -15,7 +15,7 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
 
-name: $(Date:yyyy-MM-dd-HH-mm)-$(Rev:.r)
+name: $(Date:yyyy-MM-dd-HH-mm)-$(Rev:r)
 
 stages:
 - stage: Build
