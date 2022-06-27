@@ -15,8 +15,9 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'  
 
-stages:
+name: $(Date:yyyy-MM-dd-HH-mm)-$(Rev:.r)
 
+stages:
 - stage: Build
   displayName: Build image
   jobs:
