@@ -27,14 +27,10 @@ stages:
     variables:
       buildTime: $[format('{0:yyyyMMddHHmmss}', pipeline.startTime)]
     steps: 
- #   - task: UseDotNet@2
- #     displayName: 'Install .NET 3.1 SDK'
- #     inputs:
- #       version: '3.1.x'
- #   - task: DotNetCoreCLI@2
- #     inputs:
- #       command: 'restore'
- #       projects: '**/*.csproj'      
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: echo build image is ${buildTime}      
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
@@ -61,5 +57,7 @@ stages:
       inputs:
         containerRegistry: 'register'
         repository: 'x2/vincallservice/test-vincall'
+        tags: |
+          ${buildTime}
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
