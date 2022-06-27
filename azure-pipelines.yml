@@ -13,8 +13,7 @@ variables:
   tag: '$(Build.BuildId)'
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
-  buildConfiguration: 'Release'
-  buildTime: $[format('0:yyyyMmddHHmmss', pipline.startTime)]
+  buildConfiguration: 'Release'  
 
 stages:
 
@@ -25,6 +24,8 @@ stages:
     displayName: Build
     pool:
       vmImage: ubuntu-latest
+    variables:
+      buildTime: $[format('0:yyyyMmddHHmmss', pipline.startTime)]
     steps: 
  #   - task: UseDotNet@2
  #     displayName: 'Install .NET 3.1 SDK'
