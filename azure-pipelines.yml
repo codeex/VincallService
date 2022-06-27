@@ -58,6 +58,6 @@ stages:
     - task: Docker@2
       inputs:
         containerRegistry: 'register'
-        repository: '/x2/vincallservice/test-vincall:$[format(''{0:yyyy-MM-dd-HH-mm-ss}'', pipeline.startTime)]-$(Build.BuildId)'
+        repository: 'x2/vincallservice/test-vincall:$(format(''{0:yyyy-MM-dd-HH-mm-ss}'', pipeline.startTime))-$(Build.BuildId)'
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
