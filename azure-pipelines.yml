@@ -30,7 +30,7 @@ stages:
     - task: Bash@3
       inputs:
         targetType: 'inline'
-        script: echo build image is ${buildTime}      
+        script: echo build image is $buildTime      
     - task: DotNetCoreCLI@2
       inputs:
         command: 'build'
@@ -58,6 +58,6 @@ stages:
         containerRegistry: 'register'
         repository: 'x2/vincallservice/test-vincall'
         tags: |
-          ${buildTime}
+          $(buildTime)
         command: 'buildAndPush'
         Dockerfile: '**/Dockerfile'
